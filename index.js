@@ -24,18 +24,34 @@ app.get('/', (req, res) => {
     )
 })
 
+// Async Await
 
 // Read All User
-app.get('/users', (req, res) => {
-    User.find({})
-        .then(resp => res.send(resp)).catch(err => res.send(err))
+app.get('/users', async (req, res) => {
+
+    try {
+        // tungguin pake await lalu di simpan di resp lalu di kirimkan ke res
+        let resp = await User.find({})
+        res.send(resp)
+    } catch (err) {
+        res.send(err)
+    }
+    // User.find({})
+    //     .then(resp => res.send(resp)).catch(err => res.send(err))
 })
 
-app.post('/users', (req, res) => {
+app.post('/users', async (req, res) => {
     // const user = new User({ username: 'rochafi', name: 'Rochafi', age: 22 })
     const user = new User(req.body)
-    user.save()
-        .then((resp) => { res.send(resp) }).catch(err => res.send(err))
+
+    try {
+        let resp = await user.save()
+        res.send(resp)
+    } catch (err) {
+        res.send(err)
+    }
+    // user.save()
+    // .then((resp) => { res.send(resp) }).catch(err => res.send(err))
 })
 
 app.listen(port, () => {
