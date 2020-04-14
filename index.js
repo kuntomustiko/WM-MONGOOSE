@@ -40,6 +40,9 @@ app.get('/users', async (req, res) => {
     //     .then(resp => res.send(resp)).catch(err => res.send(err))
 })
 
+// Read One User By Id
+// {error: "User dengan id 989999 tidak ditemukan"}
+
 app.post('/users', async (req, res) => {
     // const user = new User({ username: 'rochafi', name: 'Rochafi', age: 22 })
     const user = new User(req.body)
